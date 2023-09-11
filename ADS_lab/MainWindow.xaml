@@ -38,8 +38,43 @@
                  Margin="20,0,0,0"/>
 
             <StackPanel Grid.Row="1">
-
-                <RadioButton Content="Vstavka"
+                <Button Content="Insert"
+                        Height="50"
+                        Foreground="white"
+                        FontSize="14"
+                        Style="{StaticResource ButtonTheme}">                    
+                </Button>
+                <Button Content="Vorshel"
+                        Height="50"
+                        Foreground="white"
+                        FontSize="14"
+                        Style="{StaticResource ButtonTheme}">
+                </Button>
+                <Button Content="Quick"
+                        Height="50"
+                        Foreground="white"
+                        FontSize="14"
+                        Style="{StaticResource ButtonTheme}">
+                </Button>
+                <Button Content="Secret"
+                        Height="50"
+                        Foreground="white"
+                        FontSize="14"
+                        Style="{StaticResource ButtonTheme}">
+                </Button>
+                <Button Content="Secret"
+                        Height="50"
+                        Foreground="white"
+                        FontSize="14"
+                        Style="{StaticResource ButtonTheme}">
+                </Button>
+                <Button Content="Secret"
+                        Height="50"
+                        Foreground="white"
+                        FontSize="14"
+                        Style="{StaticResource ButtonTheme}">
+                </Button>
+                <!--RadioButton Content="Vstavka"
                              Height="50"
                              Foreground="white"
                              FontSize="14"
@@ -55,7 +90,7 @@
                              Height="50"
                              Foreground="white"
                              FontSize="14"
-                             Style="{StaticResource VstavkaButtonTheme}"/>
+                             Style="{StaticResource VstavkaButtonTheme}"/ -->
 
             </StackPanel>           
 
