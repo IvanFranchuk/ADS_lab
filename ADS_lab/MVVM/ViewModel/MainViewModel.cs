@@ -1,9 +1,10 @@
 ﻿using ADS_lab.Core;
 using System;
-
+using System.Windows;
 
 namespace ADS_lab.MVVM.ViewModel
 {
+
     class MainViewModel : ObservalbleObject
     {
         public HomeViewModel HomeVM { get; set; }
@@ -18,9 +19,6 @@ namespace ADS_lab.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-
-
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();

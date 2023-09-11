@@ -120,6 +120,11 @@
                             <GradientStop Color="#395B64" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
+                    <StackPanel>
+
+                        <TextBox Width="500" Height="150" x:Name="outputTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" />
+                        <Button Width="100" Height="30" Content="Сортувати" HorizontalAlignment="Left" VerticalAlignment="Top" Click="SortButton_Click" Margin="10,50,0,0"/>
+                    </StackPanel>
 
                 </Border>
 
