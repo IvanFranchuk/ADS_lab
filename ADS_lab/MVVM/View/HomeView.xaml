@@ -25,7 +25,7 @@
                         <GradientStop Color="#183D3D" Offset="0.0"/>
                         <GradientStop Color="#395B64" Offset="1"/>
                     </LinearGradientBrush>
-                </Border.Background>               
+                </Border.Background>
 
                 <Grid>
                     <StackPanel>
@@ -56,8 +56,8 @@
                                      Height="30"
                                      Margin="10,10,10,0"
                                      HorizontalAlignment="Right">
-                                
-                                
+
+
                             </TextBox>
                             <Button x:Name="Generate" 
                                     Width="100"
@@ -68,16 +68,16 @@
                                 />
                         </StackPanel>
 
-                    <!--<TextBlock Text="nuhiihsiedsf"
+                        <!--<TextBlock Text="nuhiihsiedsf"
                                    Foreground="white"
                                    FontSize="18"
                                    Margin="20,10,10,0"/>-->
                     </StackPanel>
                 </Grid>
-                
+
             </Border>
 
-           <!-- <Border Width="200" 
+            <!-- <Border Width="200" 
          Height="100"
          CornerRadius="10"
          Margin="45, 0, 0, 0">
@@ -100,7 +100,7 @@
                     <Setter Property="Margin" Value="15,0,0,0"/>
                 </Style>
             </StackPanel.Resources>
-            
+
             <TextBlock Text="Sorted"
            Foreground="White"
            FontSize="28"
@@ -122,13 +122,32 @@
                     </Border.Background>
                     <StackPanel>
 
-                        <TextBox Width="500" Height="150" x:Name="outputTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" />
+                        <TextBox Width="500" 
+                                 Height="150" 
+                                 x:Name="outputTextBlock" 
+                                 HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Margin="10,10,0,0"
+                                 BorderThickness="0.5"
+                                 BorderBrush="#040D12"
+                                 Foreground="white"
+                                 FontSize="20">
+
+
+                            <TextBox.Background>
+                                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
+                                    <GradientStop Color="#183D3D" Offset="0.0"/>
+                                    <GradientStop Color="#395B64" Offset="1"/>
+                                </LinearGradientBrush>
+                            </TextBox.Background>
+
+                        </TextBox>
                         <Button Width="100" Height="30" Content="Сортувати" HorizontalAlignment="Left" VerticalAlignment="Top" Click="SortButton_Click" Margin="10,50,0,0"/>
                     </StackPanel>
 
                 </Border>
 
-            </StackPanel> 
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </UserControl>
