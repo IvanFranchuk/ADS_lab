@@ -11,7 +11,7 @@
                    Foreground="White"
                    FontSize="28"
                    HorizontalAlignment="Left"
-                   Margin="0,0,0,20"/>
+                   Margin="0,0,0,10"/>
 
         <StackPanel Orientation="Horizontal"
                     Margin="0,0,0,10">
@@ -34,7 +34,7 @@
                                    FontSize="28"
                                    Margin="20,10,10,0"/>
 
-                                   <TextBlock Text="Yours array"
+                        <TextBlock Text="ciferky"
                                    Foreground="white"
                                    FontSize="28"
                                    Margin="20,10,10,0"/>
@@ -101,9 +101,9 @@
                 </Style>
             </StackPanel.Resources>
             
-            <TextBlock Text="fsfsefsef"
+            <TextBlock Text="Sorted"
            Foreground="White"
-           FontSize="20"
+           FontSize="28"
            HorizontalAlignment="Left"
            Margin="0,0,0,10"/>
 
