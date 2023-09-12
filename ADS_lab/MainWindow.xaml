@@ -42,18 +42,21 @@
                         Height="50"
                         Foreground="white"
                         FontSize="14"
+                        Click="InsertSortButton_Click"
                         Style="{StaticResource ButtonTheme}">                    
                 </Button>
-                <Button Content="Vorshel"
+                <Button Content="Shell"
                         Height="50"
                         Foreground="white"
                         FontSize="14"
+                        Click="ShellSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content="Quick"
                         Height="50"
                         Foreground="white"
                         FontSize="14"
+                        Click="QuickSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content="Secret"
@@ -78,28 +81,137 @@
                              Height="50"
                              Foreground="white"
                              FontSize="14"
-                             Style="{StaticResource VstavkaButtonTheme}"/>
-
-                <RadioButton Content="Vorshel"
-                            Height="50"
-                             Foreground="white"
-                             FontSize="14"
-                             Style="{StaticResource VstavkaButtonTheme}"/>
-
-                <RadioButton Content="Shvydke"
-                             Height="50"
-                             Foreground="white"
-                             FontSize="14"
                              Style="{StaticResource VstavkaButtonTheme}"/ -->
 
-            </StackPanel>           
-
-            <ContentControl Grid.Row="1"
+            </StackPanel>             
+            
+            <!--ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="5, 0, 0, 0"
-                            Content="{Binding }"/>
-                            
+                            Content="{Binding }"/ -->
 
+            <StackPanel Grid.Row="1"
+                       Grid.Column="1">
+                <TextBlock Text="Sorting"
+                Foreground="White"
+                FontSize="28"
+                HorizontalAlignment="Left"
+                Margin="0,0,0,10"/>
+
+                <StackPanel Orientation="Horizontal"
+                 Margin="0,0,0,10">
+                    <Border Width ="780"
+                 Height="150"
+                 Margin="5, 0, 0, 0" 
+                 CornerRadius="10">
+
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
+                                <GradientStop Color="#183D3D" Offset="0.0"/>
+                                <GradientStop Color="#395B64" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Yours array"
+                                Foreground="white"
+                                FontSize="28"
+                                Margin="20,10,10,0"/>
+
+                                <TextBlock Text="ciferky"
+                                Foreground="white"
+                                FontSize="28"
+                                Margin="20,10,10,0"/>
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="number of elements"
+                                 Width="170"
+                                 Height="30"
+                                 Margin="365,10,10,0"
+                                 HorizontalAlignment="Right"
+                                 Foreground="white"
+                                 FontSize="18">
+
+
+                                    </TextBlock>
+
+                                    <TextBox Width="100"
+                                  Height="30"
+                                  Margin="10,10,10,0"
+                                  HorizontalAlignment="Right">
+
+
+                                    </TextBox>
+                                    <Button x:Name="Generate" 
+                                 Width="100"
+                                 Height="30" 
+                                 HorizontalAlignment="Right"
+                                 Margin="10,10,10,0"
+                                 Content="Generate"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                    </Border>
+
+                </StackPanel>
+
+                <StackPanel>
+
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Margin" Value="15,0,0,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <TextBlock Text="Sorted"
+                               Foreground="White"
+                               FontSize="28"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,10"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width ="780"
+                                Height="240"
+                                Margin="5, 0, 0, 0" 
+                                CornerRadius="10">
+
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
+                                    <GradientStop Color="#183D3D" Offset="0.0"/>
+                                    <GradientStop Color="#395B64" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <StackPanel>
+
+                                <TextBox Width="760" 
+                                         Height="150" 
+                                         x:Name="outputTextBlock" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Top" 
+                                         Margin="10,10,0,0"
+                                         BorderThickness="0.5"
+                                         BorderBrush="#040D12"
+                                         Foreground="white"
+                                         FontSize="20">
+
+
+                                    <TextBox.Background>
+                                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
+                                            <GradientStop Color="#183D3D" Offset="0.0"/>
+                                            <GradientStop Color="#395B64" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </TextBox.Background>
+
+                                </TextBox>
+                                <Button Width="100" Height="30" Content="Сортувати" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,50,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
         </Grid>
 
         
