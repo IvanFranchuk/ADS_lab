@@ -60,19 +60,19 @@
                         Click="QuickSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content="Secret"
+                <Button Content="ше нема"
                         Height="50"
                         Foreground="white"
                         FontSize="14"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content="Secret"
+                <Button Content="ше довше нема"
                         Height="50"
                         Foreground="white"
                         FontSize="14"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content="Secret"
+                <Button Content="довше довшого нема"
                         Height="50"
                         Foreground="white"
                         FontSize="14"
@@ -124,7 +124,7 @@
                                 Background="#EADBC8"
                                 Foreground="#183D3D" 
                                 FontSize="28"
-                                Margin="20,10,10,0"
+                                Margin="20,10,10,0" TextChanged="TextBox_TextChanged"
                                 />
 
                                 <StackPanel Orientation="Horizontal">
