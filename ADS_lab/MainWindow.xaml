@@ -115,7 +115,7 @@
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Yours array"
+                                <TextBlock Text="Your array"
                                 Foreground="white"
                                 FontSize="28"
                                 Margin="20,10,10,0"/>
@@ -124,7 +124,7 @@
                                 Background="#EADBC8"
                                 Foreground="#183D3D" 
                                 FontSize="28"
-                                Margin="20,10,10,0" TextChanged="TextBox_TextChanged"
+                                Margin="20,10,10,0"
                                 />
 
                                 <StackPanel Orientation="Horizontal">
