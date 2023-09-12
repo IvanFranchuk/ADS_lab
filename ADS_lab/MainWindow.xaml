@@ -100,11 +100,11 @@
                 Margin="0,0,0,10"/>
 
                 <StackPanel Orientation="Horizontal"
-                 Margin="0,0,0,10">
+                            Margin="0,0,0,10">
                     <Border Width ="780"
-                 Height="150"
-                 Margin="5, 0, 0, 0" 
-                 CornerRadius="10">
+                            Height="150"
+                            Margin="5, 0, 0, 0" 
+                            CornerRadius="10">
 
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
@@ -115,12 +115,12 @@
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Your array"
+                                <TextBlock Text="Enter your array"
                                 Foreground="white"
                                 FontSize="28"
                                 Margin="20,10,10,0"/>
 
-                                <TextBox Text="enter your array"                                
+                                <TextBox Text="..."                                
                                 Background="#EADBC8"
                                 Foreground="#183D3D" 
                                 FontSize="28"
