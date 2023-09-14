@@ -39,11 +39,22 @@
                  Margin="20,0,0,0"/>
 
             <StackPanel Grid.Row="1">
-                <Button Content="Insert"
+
+                <!--TextBlock Text="Chose metode"
+                           Height="35"                           
+                           Foreground="#ffffff"
+                           FontSize="20"
+                           FontFamily="Arial Black"
+                           Margin="20,10,10,0"
+                          >
+                </TextBlock-->
+                
+                <Button Content="Selection"
+                        x:Name="selectionSortButton"
                         Height="50"
                         Foreground="white"
                         FontSize="14"
-                        Click="InsertSortButton_Click"
+                        Click="SelectionSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content="Shell"
@@ -60,19 +71,19 @@
                         Click="QuickSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content="ше нема"
+                <Button Content=" "
                         Height="50"
                         Foreground="white"
                         FontSize="14"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content="ше довше нема"
+                <Button Content=" "
                         Height="50"
                         Foreground="white"
                         FontSize="14"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content="довше довшого нема"
+                <Button Content=" "
                         Height="50"
                         Foreground="white"
                         FontSize="14"
@@ -238,7 +249,7 @@
                                          HorizontalAlignment="Left" 
                                          VerticalAlignment="Top" 
                                          Margin="10,10,0,0"
-                                         BorderThickness="0.5"
+                                         BorderThickness="0"
                                          BorderBrush="#040D12"
                                          Foreground="white"
                                          FontSize="20">

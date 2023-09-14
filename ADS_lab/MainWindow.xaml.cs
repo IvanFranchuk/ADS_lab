@@ -33,30 +33,46 @@ namespace ADS_lab
                 {
                     generatedArray = Array.GenerateRandomArray(size, 100);
                     StringBuilder steps = new StringBuilder();
-                    steps.AppendLine("Згенерований масив:");
+                    steps.AppendLine("Generated array:");
                     steps.AppendLine(string.Join(" ", generatedArray));
                     outputTextBlock.Text = steps.ToString();
                 }
                 else
                 {
-                    MessageBox.Show("Введіть правильний розмір масиву.");
+                    MessageBox.Show("Enter the correct array size.");
                 }
             }
 
-            private void InsertSortButton_Click(object sender, RoutedEventArgs e)
+        private void SelectionSortButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (generatedArray != null)
+            {
+                int[] array1 = Array.ProcessArray(generatedArray);
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("An array after the function is executed:");
+                steps.AppendLine(string.Join(" ", array1));
+                Array.SelectionSortDescending(array1, steps);
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("First, generate the array.");
+            }
+        }
+        private void InsertSortButton_Click(object sender, RoutedEventArgs e)
             {
                 if (generatedArray != null)
                 {
                     int[] array1 = Array.ProcessArray(generatedArray);
                     StringBuilder steps = new StringBuilder();
-                    steps.AppendLine("Масив після виконання функції:");
+                    steps.AppendLine("An array after the function is executed:");
                     steps.AppendLine(string.Join(" ", array1));
                     Array.InsertionSort(array1, steps);
                     outputTextBlock.Text = steps.ToString();
                 }
                 else
                 {
-                    MessageBox.Show("Спочатку згенеруйте масив.");
+                    MessageBox.Show("First, generate the array.");
                 }
             }
 
@@ -70,7 +86,7 @@ namespace ADS_lab
                 }
                 else
                 {
-                    MessageBox.Show("Спочатку згенеруйте масив.");
+                    MessageBox.Show("First, generate the array.");
                 }
             }
 
@@ -84,7 +100,7 @@ namespace ADS_lab
                 }
                 else
                 {
-                    MessageBox.Show("Спочатку згенеруйте масив.");
+                    MessageBox.Show("First, generate the array.");
                 }
             }
 
@@ -114,23 +130,23 @@ namespace ADS_lab
                         generatedArray = newArray;
 
                         StringBuilder steps = new StringBuilder();
-                        steps.AppendLine("Згенерований масив:");
+                        steps.AppendLine("Generated array:");
                         steps.AppendLine(string.Join(" ", generatedArray));
                         outputTextBlock.Text = steps.ToString();
                     }
                     else
                     {
-                        MessageBox.Show("Спочатку згенеруйте масив.");
+                        MessageBox.Show("First, generate the array.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Не вдалося визначити елементи. Перевірте формат вводу.");
+                    MessageBox.Show("Failed to identify items. Check the input format.");
                 }
             }
             else
             {
-                MessageBox.Show("Введіть елементи.");
+                MessageBox.Show("Enter the items.");
             }
         }
 
@@ -150,7 +166,30 @@ namespace ADS_lab
             return array;
         }
 
+        public static void SelectionSortDescending(int[] array, StringBuilder steps)
+        {
+            int n = array.Length;
 
+            for (int i = 0; i < n - 1; i++)
+            {
+                int maxIndex = i;
+
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (array[j] > array[maxIndex])
+                    {
+                        maxIndex = j;
+                    }
+                }
+
+                if (maxIndex != i)
+                {
+                    Swap(ref array[i], ref array[maxIndex]);
+                }
+
+                steps.AppendLine($"Step {i + 1}: {string.Join(" ", array)}");
+            }
+        }
 
         public static void InsertionSort(int[] array, StringBuilder steps)
         {
@@ -167,7 +206,7 @@ namespace ADS_lab
 
                 array[j + 1] = currentElement;
 
-                steps.AppendLine($"Крок {i}: {string.Join(" ", array)}");
+                steps.AppendLine($"Step {i}: {string.Join(" ", array)}");
             }
         }
 

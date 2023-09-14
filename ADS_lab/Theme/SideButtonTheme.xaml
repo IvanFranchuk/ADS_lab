@@ -27,7 +27,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#183D3D"/>
+                <Setter Property="Background" Value="#181c3d"/>
             </Trigger>
         </Style.Triggers>
         
