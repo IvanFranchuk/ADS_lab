@@ -16,7 +16,7 @@
         <viewModel:HomeViewModel/>
     </Window.DataContext>
 
-    <Border Background="#040D12"
+    <Border Background="#03040a"
             
             CornerRadius="20">
         <Grid>
@@ -44,7 +44,7 @@
                         Foreground="white"
                         FontSize="14"
                         Click="InsertSortButton_Click"
-                        Style="{StaticResource ButtonTheme}">                    
+                        Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content="Shell"
                         Height="50"
@@ -84,8 +84,8 @@
                              FontSize="14"
                              Style="{StaticResource VstavkaButtonTheme}"/ -->
 
-            </StackPanel>             
-            
+            </StackPanel>
+
             <!--ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="5, 0, 0, 0"
@@ -94,8 +94,9 @@
             <StackPanel Grid.Row="1"
                        Grid.Column="1">
                 <TextBlock Text="Options"
-                Foreground="White"
+                Foreground="#ffffff"
                 FontSize="28"
+                FontFamily="Arial Black"
                 HorizontalAlignment="Left"
                 Margin="0,0,0,10"/>
 
@@ -108,105 +109,114 @@
 
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
-                                <GradientStop Color="#183D3D" Offset="0.0"/>
-                                <GradientStop Color="#395B64" Offset="1"/>
+                                <GradientStop Color="#181c3d" Offset="0.0"/>
+                                <GradientStop Color="#181c3d" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Enter your array"
-                                Foreground="#fff3d9"
-                                FontSize="28"
-                                Margin="20,10,10,0"/>
-
-                                <TextBox Text="..."                                
-                                Background="#fff3d9"
-                                Foreground="#183D3D" 
-                                FontSize="28"
-                                Margin="20,10,10,0"
-                                />
 
                                 <StackPanel Orientation="Horizontal">
 
-                                    <TextBlock Text="number of elements"
-                                 Width="170"
-                                 Height="30"
-                                 Margin="235,10,10,0"
-                                 HorizontalAlignment="Right"
-                                 Foreground="white"
-                                 FontSize="18">
-
-
+                                    <TextBlock Text="Number of elements"
+                                               Width="225"
+                                               Height="35"                                 
+                                               Foreground="#ffffff"
+                                               FontSize="20"
+                                               FontFamily="Arial Black"
+                                               Margin="25,13,10,0">
                                     </TextBlock>
 
                                     <TextBox x:Name="arraySizeTextBox"
                                              Width="100"
                                              Height="30"
-                                             Margin="10,10,10,0"
+                                             TextAlignment="Center"
+                                             Margin="10,5,10,0"
                                              HorizontalAlignment="Right"
                                              BorderThickness="0.4"
-                                             BorderBrush="#ffffff">
-
+                                             FontSize="24"
+                                             FontFamily="Arial Black"
+                                             Foreground="#192256" 
+                                             >
+                                        
 
                                         <TextBox.Background>
                                             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
-                                                <GradientStop Color="#EADBC8" Offset="0.0"/>
-                                                <GradientStop Color="#fff3d9" Offset="1"/>
+                                                <GradientStop Color="#ffffff" Offset="0.0"/>
+                                                <GradientStop Color="#ffffff" Offset="1"/>
                                             </LinearGradientBrush>
                                         </TextBox.Background>
 
 
                                     </TextBox>
-                                    <Button x:Name="Add" 
+                                    <Button x:Name="Generate" 
+                                            Click="GenerateButton_Click"
                                             Width="100"
                                             Height="30" 
                                             HorizontalAlignment="Right"
-                                            Margin="10,10,10,0"
+                                            Margin="10,5,10,0"
                                             Content="Generate"
-                                            Background="#fff3d9"
-                                            Foreground="#040d12" 
+                                            Background="#f24d5e"
+                                            Foreground="#ffffff"  
                                             FontStyle="Normal"
                                             FontSize="12"
                                             FontFamily="Arial Black"
                                             BorderThickness="0"
                                             />
-
-                                    <Button x:Name="file" 
+                                </StackPanel>
+                                <TextBlock Text="Enter the elements you want to add"
+                                           Foreground="#ffffff"
+                                           FontSize="20"
+                                           FontFamily="Arial Black"
+                                           Margin="25,10,10,0"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="arrayElementTextBox"
+                                         Text=" "
+                                         Width="600"
+                                         Height="30"
+                                         Background="#ffffff"
+                                         Foreground="#192256"
+                                         FontSize="24"
+                                         FontFamily="Arial Black"
+                                         Margin="25,10,10,0"
+                                         HorizontalAlignment="Left"
+                                         AcceptsReturn="True" 
+                                         TextWrapping="Wrap"/>
+                                    <Button x:Name="addElementButton"
+                                            Click="AddElementButton_Click"
                                             Width="100"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="10,10,10,0"
-                                            Content="Read from file"
-                                            Background="#EADBC8"
-                                            Foreground="#040d12" 
+                                            Content="Add"
+                                            Background="#f24d5e"
+                                            Foreground="#ffffff" 
                                             FontStyle="Normal"
                                             FontSize="12"
                                             FontFamily="Arial Black"
-                                            BorderThickness="0"
-                                            />
+                                            BorderThickness="0"/>
+
 
                                 </StackPanel>
+
                             </StackPanel>
                         </Grid>
-
                     </Border>
-
                 </StackPanel>
-
                 <StackPanel>
-
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="Margin" Value="15,0,0,0"/>
                         </Style>
                     </StackPanel.Resources>
 
-                    <TextBlock Text="Sorted"
-                               Foreground="White"
+                    <TextBlock Text="Sorting process"
+                               Foreground="#ffffff"
                                FontSize="28"
                                HorizontalAlignment="Left"
-                               Margin="0,0,0,10"/>
+                               Margin="0,0,0,10"
+                               FontFamily="Arial Black"/>
 
                     <StackPanel Orientation="Horizontal">
                         <Border Width ="780"
@@ -216,14 +226,14 @@
 
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
-                                    <GradientStop Color="#183D3D" Offset="0.0"/>
-                                    <GradientStop Color="#395B64" Offset="1"/>
+                                    <GradientStop Color="#181c3d" Offset="0.0"/>
+                                    <GradientStop Color="#181c3d" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                             <StackPanel>
 
                                 <TextBox Width="760" 
-                                         Height="150" 
+                                         Height="220" 
                                          x:Name="outputTextBlock" 
                                          HorizontalAlignment="Left" 
                                          VerticalAlignment="Top" 
@@ -233,25 +243,19 @@
                                          Foreground="white"
                                          FontSize="20">
 
-
                                     <TextBox.Background>
                                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
-                                            <GradientStop Color="#183D3D" Offset="0.0"/>
-                                            <GradientStop Color="#395B64" Offset="1"/>
+                                            <GradientStop Color="#181c3d" Offset="0.0"/>
+                                            <GradientStop Color="#181c3d" Offset="1"/>
                                         </LinearGradientBrush>
                                     </TextBox.Background>
 
                                 </TextBox>
-                                
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>
-
-        
-
-
     </Border>
 </Window>

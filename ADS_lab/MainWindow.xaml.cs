@@ -20,77 +20,121 @@ namespace ADS_lab
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        private int[] generatedArray; // Поле для зберігання згенерованого масиву
 
-        private void InsertSortButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            public MainWindow()
             {
-                int[] array = Array.GenerateRandomArray(size, 100);
-                StringBuilder steps = new StringBuilder();
-                steps.AppendLine("Згенерований масив масив:");
-                steps.AppendLine(string.Join(" ", array));
+                InitializeComponent();
+            }
 
-                int[] array1 = Array.ProcessArray(array); // Видаляємо елементи, які діляться на 3
+            private void GenerateButton_Click(object sender, RoutedEventArgs e)
+            {
+                if (int.TryParse(arraySizeTextBox.Text, out int size))
+                {
+                    generatedArray = Array.GenerateRandomArray(size, 100);
+                    StringBuilder steps = new StringBuilder();
+                    steps.AppendLine("Згенерований масив:");
+                    steps.AppendLine(string.Join(" ", generatedArray));
+                    outputTextBlock.Text = steps.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Введіть правильний розмір масиву.");
+                }
+            }
 
-                steps.AppendLine("Масив після виконання функції:");
-                steps.AppendLine(string.Join(" ", array1));
+            private void InsertSortButton_Click(object sender, RoutedEventArgs e)
+            {
+                if (generatedArray != null)
+                {
+                    int[] array1 = Array.ProcessArray(generatedArray);
+                    StringBuilder steps = new StringBuilder();
+                    steps.AppendLine("Масив після виконання функції:");
+                    steps.AppendLine(string.Join(" ", array1));
+                    Array.InsertionSort(array1, steps);
+                    outputTextBlock.Text = steps.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Спочатку згенеруйте масив.");
+                }
+            }
 
-                Array.InsertionSort(array1, steps);
+            private void ShellSortButton_Click(object sender, RoutedEventArgs e)
+            {
+                if (generatedArray != null)
+                {
+                    StringBuilder steps = new StringBuilder();
+                    Array.ShellSort(generatedArray, steps);
+                    outputTextBlock.Text = steps.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Спочатку згенеруйте масив.");
+                }
+            }
 
-                outputTextBlock.Text = steps.ToString();
+            private void QuickSortButton_Click(object sender, RoutedEventArgs e)
+            {
+                if (generatedArray != null)
+                {
+                    StringBuilder steps = new StringBuilder();
+                    Array.QuickSort(generatedArray, 0, generatedArray.Length - 1, steps);
+                    outputTextBlock.Text = steps.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Спочатку згенеруйте масив.");
+                }
+            }
+
+        private void AddElementButton_Click(object sender, RoutedEventArgs e)
+        {
+            string input = arrayElementTextBox.Text;
+
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                string[] elements = input.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (elements.Length > 0)
+                {
+                    if (generatedArray != null)
+                    {
+                        int[] newArray = new int[generatedArray.Length + elements.Length];
+                        generatedArray.CopyTo(newArray, 0);
+
+                        for (int i = 0; i < elements.Length; i++)
+                        {
+                            if (int.TryParse(elements[i], out int element))
+                            {
+                                newArray[generatedArray.Length + i] = element;
+                            }
+                        }
+
+                        generatedArray = newArray;
+
+                        StringBuilder steps = new StringBuilder();
+                        steps.AppendLine("Згенерований масив:");
+                        steps.AppendLine(string.Join(" ", generatedArray));
+                        outputTextBlock.Text = steps.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Спочатку згенеруйте масив.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Не вдалося визначити елементи. Перевірте формат вводу.");
+                }
             }
             else
             {
-                MessageBox.Show("Введіть правильний розмір масиву.");
+                MessageBox.Show("Введіть елементи.");
             }
         }
 
 
-        private void ShellSortButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (int.TryParse(arraySizeTextBox.Text, out int size))
-            {
-                int[] array = Array.GenerateRandomArray(size, 100);
-                StringBuilder steps = new StringBuilder();
-
-                steps.AppendLine("Несортований масив:");
-                steps.AppendLine(string.Join(" ", array));
-
-                Array.ShellSort(array, steps);
-
-                outputTextBlock.Text = steps.ToString();
-            }
-            else
-            {
-                MessageBox.Show("Введіть правильний розмір масиву.");
-            }
-        }
-
-        private void QuickSortButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (int.TryParse(arraySizeTextBox.Text, out int size))
-            {
-                int[] array = Array.GenerateRandomArray(size, 100);
-                StringBuilder steps = new StringBuilder();
-
-                steps.AppendLine("Несортований масив:");
-                steps.AppendLine(string.Join(" ", array));
-
-                Array.QuickSort(array, 0, array.Length - 1, steps);
-
-                outputTextBlock.Text = steps.ToString();
-            }
-            else
-            {
-                MessageBox.Show("Введіть правильний розмір масиву.");
-            }
-        }
     }
 
     public class Array
@@ -105,6 +149,8 @@ namespace ADS_lab
             }
             return array;
         }
+
+
 
         public static void InsertionSort(int[] array, StringBuilder steps)
         {
@@ -190,9 +236,8 @@ namespace ADS_lab
         }
 
         private static int Function(int x)
-        {
-            // Ваша функція, яку застосовуємо до елементів
-            return x * x; // Наприклад, підносимо до квадрату
+        {            
+            return x * x; 
         }
     }
 }
