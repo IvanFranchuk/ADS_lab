@@ -116,12 +116,12 @@
                         <Grid>
                             <StackPanel>
                                 <TextBlock Text="Enter your array"
-                                Foreground="white"
+                                Foreground="#fff3d9"
                                 FontSize="28"
                                 Margin="20,10,10,0"/>
 
                                 <TextBox Text="..."                                
-                                Background="#EADBC8"
+                                Background="#fff3d9"
                                 Foreground="#183D3D" 
                                 FontSize="28"
                                 Margin="20,10,10,0"
@@ -140,7 +140,8 @@
 
                                     </TextBlock>
 
-                                    <TextBox Width="100"
+                                    <TextBox x:Name="arraySizeTextBox"
+                                             Width="100"
                                              Height="30"
                                              Margin="10,10,10,0"
                                              HorizontalAlignment="Right"
@@ -151,19 +152,19 @@
                                         <TextBox.Background>
                                             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
                                                 <GradientStop Color="#EADBC8" Offset="0.0"/>
-                                                <GradientStop Color="#EADBC8" Offset="1"/>
+                                                <GradientStop Color="#fff3d9" Offset="1"/>
                                             </LinearGradientBrush>
                                         </TextBox.Background>
 
 
                                     </TextBox>
-                                    <Button x:Name="Generate" 
+                                    <Button x:Name="Add" 
                                             Width="100"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="10,10,10,0"
                                             Content="Generate"
-                                            Background="#EADBC8"
+                                            Background="#fff3d9"
                                             Foreground="#040d12" 
                                             FontStyle="Normal"
                                             FontSize="12"

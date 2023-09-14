@@ -23,140 +23,177 @@ namespace ADS_lab
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
         private void InsertSortButton_Click(object sender, RoutedEventArgs e)
         {
-            int[] array = Array.GenerateRandomArray(10, 100);
-            StringBuilder steps = new StringBuilder();
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            {
+                int[] array = Array.GenerateRandomArray(size, 100);
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("Згенерований масив масив:");
+                steps.AppendLine(string.Join(" ", array));
 
-            steps.AppendLine("Несортований масив:");
-            steps.AppendLine(string.Join(" ", array));
+                int[] array1 = Array.ProcessArray(array); // Видаляємо елементи, які діляться на 3
 
-            Array.InsertionSort(array, steps);
+                steps.AppendLine("Масив після виконання функції:");
+                steps.AppendLine(string.Join(" ", array1));
 
-            outputTextBlock.Text = steps.ToString();
+                Array.InsertionSort(array1, steps);
+
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Введіть правильний розмір масиву.");
+            }
         }
+
 
         private void ShellSortButton_Click(object sender, RoutedEventArgs e)
         {
-            int[] array = Array.GenerateRandomArray(10, 100);
-            StringBuilder steps = new StringBuilder();
 
-            steps.AppendLine("Несортований масив:");
-            steps.AppendLine(string.Join(" ", array));
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            {
+                int[] array = Array.GenerateRandomArray(size, 100);
+                StringBuilder steps = new StringBuilder();
 
-            Array.ShellSort(array, steps);
+                steps.AppendLine("Несортований масив:");
+                steps.AppendLine(string.Join(" ", array));
 
-            outputTextBlock.Text = steps.ToString();
+                Array.ShellSort(array, steps);
+
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Введіть правильний розмір масиву.");
+            }
         }
 
         private void QuickSortButton_Click(object sender, RoutedEventArgs e)
         {
-            int[] array = Array.GenerateRandomArray(10, 100);
-            StringBuilder steps = new StringBuilder();
 
-            steps.AppendLine("Несортований масив:");
-            steps.AppendLine(string.Join(" ", array));
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            {
+                int[] array = Array.GenerateRandomArray(size, 100);
+                StringBuilder steps = new StringBuilder();
 
-            Array.QuickSort(array, 0, array.Length - 1, steps);
+                steps.AppendLine("Несортований масив:");
+                steps.AppendLine(string.Join(" ", array));
 
-            outputTextBlock.Text = steps.ToString();
+                Array.QuickSort(array, 0, array.Length - 1, steps);
+
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Введіть правильний розмір масиву.");
+            }
         }
     }
 
     public class Array
+    {
+        public static int[] GenerateRandomArray(int size, int maxValue)
         {
-            public static int[] GenerateRandomArray(int size, int maxValue)
+            Random random = new Random();
+            int[] array = new int[size];
+            for (int i = 0; i < size; i++)
             {
-                Random random = new Random();
-                int[] array = new int[size];
-                for (int i = 0; i < size; i++)
-                {
-                    array[i] = random.Next(1, maxValue);
-                }
-                return array;
+                array[i] = random.Next(1, maxValue);
             }
+            return array;
+        }
 
-            public static void InsertionSort(int[] array, StringBuilder steps)
+        public static void InsertionSort(int[] array, StringBuilder steps)
+        {
+            for (int i = 1; i < array.Length; i++)
             {
-                for (int i = 1; i < array.Length; i++)
+                int currentElement = array[i];
+                int j = i - 1;
+
+                while (j >= 0 && array[j] > currentElement)
                 {
-                    int currentElement = array[i];
-                    int j = i - 1;
-
-                    while (j >= 0 && array[j] > currentElement)
-                    {
-                        array[j + 1] = array[j];
-                        j--;
-                    }
-
-                    array[j + 1] = currentElement;
-
-                    steps.AppendLine($"Крок {i}: {string.Join(" ", array)}");
-                }
-            }
-
-            public static void ShellSort(int[] array, StringBuilder steps)
-            {
-                int d = array.Length / 2;
-                while (d >= 1)
-                {
-                    for (int i = d; i < array.Length; i++)
-                    {
-                        int j = i;
-                        while (j >= d && array[j - d] > array[j])
-                        {
-                            Swap(ref array[j], ref array[j - d]);
-                            j = j - d;
-                        }
-                    }
-
-                    steps.AppendLine($"Крок зі зсувом {d}: {string.Join(" ", array)}");
-
-                    d = d / 2;
-                }
-            }
-
-            public static void QuickSort(int[] array, int left, int right, StringBuilder steps)
-            {
-                if (left < right)
-                {
-                    int pivotIndex = Partition(array, left, right, steps);
-
-                    QuickSort(array, left, pivotIndex - 1, steps);
-                    QuickSort(array, pivotIndex + 1, right, steps);
-                }
-            }
-
-            private static int Partition(int[] array, int left, int right, StringBuilder steps)
-            {
-                int pivot = array[right];
-                int i = left - 1;
-
-                for (int j = left; j < right; j++)
-                {
-                    if (array[j] < pivot)
-                    {
-                        i++;
-                        Swap(ref array[i], ref array[j]);
-                    }
+                    array[j + 1] = array[j];
+                    j--;
                 }
 
-                Swap(ref array[i + 1], ref array[right]);
+                array[j + 1] = currentElement;
 
-                steps.AppendLine($"Підмасив після розділення на опорний елемент {pivot}: {string.Join(" ", array)}");
-
-                return i + 1;
-            }
-
-            private static void Swap(ref int a, ref int b)
-            {
-                int temp = a;
-                a = b;
-                b = temp;
+                steps.AppendLine($"Крок {i}: {string.Join(" ", array)}");
             }
         }
+
+        public static void ShellSort(int[] array, StringBuilder steps)
+        {
+            int d = array.Length / 2;
+            while (d >= 1)
+            {
+                for (int i = d; i < array.Length; i++)
+                {
+                    int j = i;
+                    while (j >= d && array[j - d] > array[j])
+                    {
+                        Swap(ref array[j], ref array[j - d]);
+                        j = j - d;
+                    }
+                }
+
+                steps.AppendLine($"Крок зі зсувом {d}: {string.Join(" ", array)}");
+
+                d = d / 2;
+            }
+        }
+
+        public static void QuickSort(int[] array, int left, int right, StringBuilder steps)
+        {
+            if (left < right)
+            {
+                int pivotIndex = Partition(array, left, right, steps);
+
+                QuickSort(array, left, pivotIndex - 1, steps);
+                QuickSort(array, pivotIndex + 1, right, steps);
+            }
+        }
+
+        private static int Partition(int[] array, int left, int right, StringBuilder steps)
+        {
+            int pivot = array[right];
+            int i = left - 1;
+
+            for (int j = left; j < right; j++)
+            {
+                if (array[j] < pivot)
+                {
+                    i++;
+                    Swap(ref array[i], ref array[j]);
+                }
+            }
+
+            Swap(ref array[i + 1], ref array[right]);
+
+            steps.AppendLine($"Підмасив після розділення на опорний елемент {pivot}: {string.Join(" ", array)}");
+
+            return i + 1;
+        }
+
+        private static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        public static int[] ProcessArray(int[] array)
+        {
+            return array.Where(item => item % 3 != 0).Select(item => Function(item)).ToArray();
+        }
+
+        private static int Function(int x)
+        {
+            // Ваша функція, яку застосовуємо до елементів
+            return x * x; // Наприклад, підносимо до квадрату
+        }
     }
+}
+    
