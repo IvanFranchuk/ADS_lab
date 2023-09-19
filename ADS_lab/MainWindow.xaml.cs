@@ -2,52 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ADS_lab
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Inter   action logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int[] generatedArray; // Поле для зберігання згенерованого масиву
+        private int[] generatedIntArray; // Поле для зберігання згенерованого масиву
+        private string[] generatedCityArray; // Поле для зберігання згенерованого масиву
+        private double[] generatedDoubleArray; // Поле для зберігання згенерованого масиву
 
-            public MainWindow()
-            {
-                InitializeComponent();
-            }
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
-            private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
             {
-                if (int.TryParse(arraySizeTextBox.Text, out int size))
-                {
-                    generatedArray = Array.GenerateRandomArray(size, 100);
-                    StringBuilder steps = new StringBuilder();
-                    steps.AppendLine("Generated array:");
-                    steps.AppendLine(string.Join(" ", generatedArray));
-                    outputTextBlock.Text = steps.ToString();
-                }
-                else
-                {
-                    MessageBox.Show("Enter the correct array size.");
-                }
+                generatedIntArray = Array.GenerateRandomArray(size, 100);
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("Generated array:");
+                steps.AppendLine(string.Join(" ", generatedIntArray));
+                outputTextBlock.Text = steps.ToString();
             }
+            else
+            {
+                MessageBox.Show("Enter the correct array size.");
+            }
+        }
+
+        private void GenerateCityButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            {
+                Array.CityArrayGenerator cityArrayGenerator = new Array.CityArrayGenerator();
+                generatedCityArray = cityArrayGenerator.GenerateCityArray(size);
+
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("Generated city array:");
+                steps.AppendLine(string.Join(", ", generatedCityArray));
+
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Enter the correct array size.");
+            }
+        }
+
+        private void GenerateDoubleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            {
+                generatedDoubleArray = Array.GenerateDoubleArray(size);
+
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("Generated Double array:");
+                steps.AppendLine(string.Join(", ", generatedDoubleArray));
+
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Enter the correct array size.");
+            }
+        }
+
 
         private void SelectionSortButton_Click(object sender, RoutedEventArgs e)
         {
-            if (generatedArray != null)
+            if (generatedIntArray != null)
             {
-                int[] array1 = Array.ProcessArray(generatedArray);
+                int[] array1 = Array.ProcessArray(generatedIntArray);
                 StringBuilder steps = new StringBuilder();
                 steps.AppendLine("An array after the function is executed:");
                 steps.AppendLine(string.Join(" ", array1));
@@ -60,49 +91,49 @@ namespace ADS_lab
             }
         }
         private void InsertSortButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (generatedIntArray != null)
             {
-                if (generatedArray != null)
-                {
-                    int[] array1 = Array.ProcessArray(generatedArray);
-                    StringBuilder steps = new StringBuilder();
-                    steps.AppendLine("An array after the function is executed:");
-                    steps.AppendLine(string.Join(" ", array1));
-                    Array.InsertionSort(array1, steps);
-                    outputTextBlock.Text = steps.ToString();
-                }
-                else
-                {
-                    MessageBox.Show("First, generate the array.");
-                }
+                int[] array1 = Array.ProcessArray(generatedIntArray);
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("An array after the function is executed:");
+                steps.AppendLine(string.Join(" ", array1));
+                Array.InsertionSort(array1, steps);
+                outputTextBlock.Text = steps.ToString();
             }
+            else
+            {
+                MessageBox.Show("First, generate the array.");
+            }
+        }
 
-            private void ShellSortButton_Click(object sender, RoutedEventArgs e)
+        private void ShellSortButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (generatedIntArray != null)
             {
-                if (generatedArray != null)
-                {
-                    StringBuilder steps = new StringBuilder();
-                    Array.ShellSort(generatedArray, steps);
-                    outputTextBlock.Text = steps.ToString();
-                }
-                else
-                {
-                    MessageBox.Show("First, generate the array.");
-                }
+                StringBuilder steps = new StringBuilder();
+                Array.ShellSort(generatedIntArray, steps);
+                outputTextBlock.Text = steps.ToString();
             }
+            else
+            {
+                MessageBox.Show("First, generate the array.");
+            }
+        }
 
-            private void QuickSortButton_Click(object sender, RoutedEventArgs e)
+        private void QuickSortButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (generatedIntArray != null)
             {
-                if (generatedArray != null)
-                {
-                    StringBuilder steps = new StringBuilder();
-                    Array.QuickSort(generatedArray, 0, generatedArray.Length - 1, steps);
-                    outputTextBlock.Text = steps.ToString();
-                }
-                else
-                {
-                    MessageBox.Show("First, generate the array.");
-                }
+                StringBuilder steps = new StringBuilder();
+                Array.QuickSort(generatedIntArray, 0, generatedIntArray.Length - 1, steps);
+                outputTextBlock.Text = steps.ToString();
             }
+            else
+            {
+                MessageBox.Show("First, generate the array.");
+            }
+        }
 
         private void AddElementButton_Click(object sender, RoutedEventArgs e)
         {
@@ -114,24 +145,24 @@ namespace ADS_lab
 
                 if (elements.Length > 0)
                 {
-                    if (generatedArray != null)
+                    if (generatedIntArray != null)
                     {
-                        int[] newArray = new int[generatedArray.Length + elements.Length];
-                        generatedArray.CopyTo(newArray, 0);
+                        int[] newArray = new int[generatedIntArray.Length + elements.Length];
+                        generatedIntArray.CopyTo(newArray, 0);
 
                         for (int i = 0; i < elements.Length; i++)
                         {
                             if (int.TryParse(elements[i], out int element))
                             {
-                                newArray[generatedArray.Length + i] = element;
+                                newArray[generatedIntArray.Length + i] = element;
                             }
                         }
 
-                        generatedArray = newArray;
+                        generatedIntArray = newArray;
 
                         StringBuilder steps = new StringBuilder();
                         steps.AppendLine("Generated array:");
-                        steps.AppendLine(string.Join(" ", generatedArray));
+                        steps.AppendLine(string.Join(" ", generatedIntArray));
                         outputTextBlock.Text = steps.ToString();
                     }
                     else
@@ -164,6 +195,47 @@ namespace ADS_lab
                 array[i] = random.Next(1, maxValue);
             }
             return array;
+        }
+
+        public class CityArrayGenerator
+        {
+            private List<string> cities;
+
+            public CityArrayGenerator()
+            {
+                cities = new List<string>
+                {
+            "Kyiv", "Lviv", "Odessa", "Kharkiv", "Dnipro",
+            "Kherson", "Zaporizhzhia", "Poltava", "Vinnytsia", "Chernivtsi"
+                };
+            }
+
+            public string[] GenerateCityArray(int size)
+            {
+                Random random = new Random();
+                string[] cityArray = new string[size];
+
+                for (int i = 0; i < size; i++)
+                {
+                    int randomIndex = random.Next(0, cities.Count);
+                    cityArray[i] = cities[randomIndex];
+                }
+
+                return cityArray;
+            }
+        }
+
+        public static double[] GenerateDoubleArray(int size)
+        {
+            Random random = new Random();
+            double[] doubleArray = new double[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                doubleArray[i] = random.NextDouble() * 100.0; // Generates random doubles between 0 and 100
+            }
+
+            return doubleArray;
         }
 
         public static void SelectionSortDescending(int[] array, StringBuilder steps)
@@ -275,9 +347,10 @@ namespace ADS_lab
         }
 
         private static int Function(int x)
-        {            
-            return x * x; 
+        {
+            return x * x;
         }
     }
 }
-    
+
+
