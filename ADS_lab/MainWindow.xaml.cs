@@ -36,7 +36,7 @@ namespace ADS_lab
             }
         }
 
-        private void GenerateCityButton_Click(object sender, RoutedEventArgs e)
+        /*private void GenerateCityButton_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(arraySizeTextBox.Text, out int size))
             {
@@ -53,7 +53,34 @@ namespace ADS_lab
             {
                 MessageBox.Show("Enter the correct array size.");
             }
+        }*/
+
+        private void GenerateCityButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(arraySizeTextBox.Text, out int size))
+            {
+                Array.CityArrayGenerator cityArrayGenerator = new Array.CityArrayGenerator();
+                generatedCityArray = cityArrayGenerator.GenerateCityArray(size);
+
+                StringBuilder steps = new StringBuilder();
+                steps.AppendLine("Generated city array (before removal):");
+                steps.AppendLine(string.Join(", ", generatedCityArray));
+
+                // Застосувати фільтрацію міст за кількістю букв
+                generatedCityArray = cityArrayGenerator.RemoveCitiesWithMoreThan8Letters(generatedCityArray);
+
+                steps.AppendLine("Generated city array (after removal):");
+                steps.AppendLine(string.Join(", ", generatedCityArray));
+
+                outputTextBlock.Text = steps.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Enter the correct array size.");
+            }
         }
+
+
 
         private void GenerateDoubleButton_Click(object sender, RoutedEventArgs e)
         {
@@ -109,15 +136,21 @@ namespace ADS_lab
 
         private void ShellSortButton_Click(object sender, RoutedEventArgs e)
         {
-            if (generatedIntArray != null)
+            if (generatedCityArray != null && generatedCityArray.Length > 1)
             {
                 StringBuilder steps = new StringBuilder();
-                Array.ShellSort(generatedIntArray, steps);
+                string[] sortedCities = (string[])generatedCityArray.Clone();
+
+                steps.AppendLine("Original city array:");
+                steps.AppendLine(string.Join(", ", sortedCities));
+
+                Array.ShellSortCities(sortedCities, steps);
+
                 outputTextBlock.Text = steps.ToString();
             }
             else
             {
-                MessageBox.Show("First, generate the array.");
+                MessageBox.Show("Generate a city array before sorting.");
             }
         }
 
@@ -181,6 +214,11 @@ namespace ADS_lab
             }
         }
 
+        private void AddCityButton_Click(object sender, RoutedEventArgs e)
+        { }
+        private void AddDoubleButton_Click(object sender, RoutedEventArgs e)
+        { }
+
 
     }
 
@@ -205,9 +243,20 @@ namespace ADS_lab
             {
                 cities = new List<string>
                 {
-            "Kyiv", "Lviv", "Odessa", "Kharkiv", "Dnipro",
-            "Kherson", "Zaporizhzhia", "Poltava", "Vinnytsia", "Chernivtsi"
-                };
+                    "Kyiv", "Lviv", "Odessa", "Kharkiv", "Dnipro",
+                    "Kherson", "Zaporizhzhia", "Poltava", "Vinnytsia", "Chernivtsi",
+                    "Rivne", "Ternopil", "Ivano-Frankivsk", "Lutsk", "Uzhhorod",
+                    "Mykolaiv", "Kropyvnytskyi", "Sumy", "Cherkasy", "Chernihiv",
+                    "Khmelnytskyi", "Zhytomyr", "Mukachevo", "Kamianets-Podilskyi", "Kremenchuk",
+                    "Yalta", "Simferopol", "Sevastopol", "Donetsk", "Luhansk",
+                    "Lviv", "Minsk", "Vilnius", "Riga", "Tallinn",
+                    "Berlin", "Paris", "London", "Amsterdam", "Madrid",
+                    "New York", "Los Angeles", "Chicago", "Houston", "Philadelphia",
+                    "San Francisco", "Miami", "Las Vegas", "Boston", "Washington D.C.",
+                    "Toronto", "Vancouver", "Montreal", "Sydney", "Melbourne",
+                    "Tokyo", "Beijing", "Shanghai", "Seoul", "Bangkok"
+
+            };
             }
 
             public string[] GenerateCityArray(int size)
@@ -223,6 +272,22 @@ namespace ADS_lab
 
                 return cityArray;
             }
+
+            public string[] RemoveCitiesWithMoreThan8Letters(string[] cityArray)
+            {
+                List<string> filteredCities = new List<string>();
+
+                foreach (string city in cityArray)
+                {
+                    if (city.Length <= 8)
+                    {
+                        filteredCities.Add(city);
+                    }
+                }
+
+                return filteredCities.ToArray();
+            }
+
         }
 
         public static double[] GenerateDoubleArray(int size)
@@ -262,6 +327,33 @@ namespace ADS_lab
                 steps.AppendLine($"Step {i + 1}: {string.Join(" ", array)}");
             }
         }
+
+        public static void ShellSortCities(string[] cityArray, StringBuilder steps)
+        {
+            int n = cityArray.Length;
+            int gap = n / 2;
+
+            while (gap > 0)
+            {
+                for (int i = gap; i < n; i++)
+                {
+                    string temp = cityArray[i];
+                    int j = i;
+
+                    while (j >= gap && string.Compare(cityArray[j - gap], temp) > 0)
+                    {
+                        cityArray[j] = cityArray[j - gap];
+                        j -= gap;
+                    }
+
+                    cityArray[j] = temp;
+                }
+
+                steps.AppendLine($"Step with gap {gap}: {string.Join(", ", cityArray)}");
+                gap /= 2;
+            }
+        }
+
 
         public static void InsertionSort(int[] array, StringBuilder steps)
         {
