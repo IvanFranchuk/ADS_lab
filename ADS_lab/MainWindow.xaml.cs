@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
 
 namespace ADS_lab
 {
-    /// <summary>
-    /// Inter   action logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private int[] generatedIntArray; // Поле для зберігання згенерованого масиву
         private string[] generatedCityArray; // Поле для зберігання згенерованого масиву
         private double[] generatedDoubleArray; // Поле для зберігання згенерованого масиву
+
+        private int comparisonsCount = 0; // Змінна для підрахунку кількості порівнянь
+        private int swapsCount = 0;      // Змінна для підрахунку кількості перестановок
+        private Stopwatch sortingStopwatch = new Stopwatch();
+
+
 
         public MainWindow()
         {
@@ -35,26 +39,6 @@ namespace ADS_lab
                 MessageBox.Show("Enter the correct array size.");
             }
         }
-
-        /*private void GenerateCityButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (int.TryParse(arraySizeTextBox.Text, out int size))
-            {
-                Array.CityArrayGenerator cityArrayGenerator = new Array.CityArrayGenerator();
-                generatedCityArray = cityArrayGenerator.GenerateCityArray(size);
-
-                StringBuilder steps = new StringBuilder();
-                steps.AppendLine("Generated city array:");
-                steps.AppendLine(string.Join(", ", generatedCityArray));
-
-                outputTextBlock.Text = steps.ToString();
-            }
-            else
-            {
-                MessageBox.Show("Enter the correct array size.");
-            }
-        }*/
-
         private void GenerateCityButton_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(arraySizeTextBox.Text, out int size))
@@ -99,8 +83,6 @@ namespace ADS_lab
                 MessageBox.Show("Enter the correct array size.");
             }
         }
-
-
         private void SelectionSortButton_Click(object sender, RoutedEventArgs e)
         {
             if (generatedIntArray != null)
@@ -109,8 +91,14 @@ namespace ADS_lab
                 StringBuilder steps = new StringBuilder();
                 steps.AppendLine("An array after the function is executed:");
                 steps.AppendLine(string.Join(" ", array1));
+
+                sortingStopwatch.Restart(); // Початок вимірювання часу сортування
                 Array.SelectionSortDescending(array1, steps);
+                sortingStopwatch.Stop(); // Зупинити вимірювання часу сортування
+
+                // Виведіть час сортування у ваш TextBox
                 outputTextBlock.Text = steps.ToString();
+                outputInfoTextBlock.Text = $"Sorting time: {sortingStopwatch.ElapsedMilliseconds} ms";
             }
             else
             {
@@ -144,9 +132,12 @@ namespace ADS_lab
                 steps.AppendLine("Original city array:");
                 steps.AppendLine(string.Join(", ", sortedCities));
 
+                sortingStopwatch.Restart();
                 Array.ShellSortCities(sortedCities, steps);
+                sortingStopwatch.Stop();
 
                 outputTextBlock.Text = steps.ToString();
+                outputInfoTextBlock.Text = $"Sorting time: {sortingStopwatch.ElapsedMilliseconds} ms";
             }
             else
             {
@@ -215,11 +206,47 @@ namespace ADS_lab
         }
 
         private void AddCityButton_Click(object sender, RoutedEventArgs e)
-        { }
+        {
+            if (generatedCityArray != null)
+            {
+                string newCity = arrayElementTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(newCity))
+                {
+                    // Створюємо новий масив, який буде більшим на один елемент
+                    string[] newArray = new string[generatedCityArray.Length + 1];
+
+                    // Копіюємо існуючі міста в новий масив
+                    for (int i = 0; i < generatedCityArray.Length; i++)
+                    {
+                        newArray[i] = generatedCityArray[i];
+                    }
+
+                    // Додаємо нове місто в кінець масиву
+                    newArray[newArray.Length - 1] = newCity;
+
+                    // Оновлюємо змінну generatedCityArray
+                    generatedCityArray = newArray;
+
+                    // Оновлюємо текстовий блок зі списком міст
+                    StringBuilder steps = new StringBuilder();
+                    steps.AppendLine("Generated city array (after adding a city):");
+                    steps.AppendLine(string.Join(", ", generatedCityArray));
+                    outputTextBlock.Text = steps.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Enter the city name.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Generate a city array before adding a city.");
+            }
+        }
+
         private void AddDoubleButton_Click(object sender, RoutedEventArgs e)
         { }
-
-
     }
 
     public class Array
@@ -249,13 +276,13 @@ namespace ADS_lab
                     "Mykolaiv", "Kropyvnytskyi", "Sumy", "Cherkasy", "Chernihiv",
                     "Khmelnytskyi", "Zhytomyr", "Mukachevo", "Kamianets-Podilskyi", "Kremenchuk",
                     "Yalta", "Simferopol", "Sevastopol", "Donetsk", "Luhansk",
-                    "Lviv", "Minsk", "Vilnius", "Riga", "Tallinn",
+                    "Lviv", "Vilnius", "Riga", "Tallinn",
                     "Berlin", "Paris", "London", "Amsterdam", "Madrid",
                     "New York", "Los Angeles", "Chicago", "Houston", "Philadelphia",
                     "San Francisco", "Miami", "Las Vegas", "Boston", "Washington D.C.",
                     "Toronto", "Vancouver", "Montreal", "Sydney", "Melbourne",
-                    "Tokyo", "Beijing", "Shanghai", "Seoul", "Bangkok"
-
+                    "Tokyo", "Beijing", "Shanghai", "Seoul", "Bangkok",
+                    "Izyaslav", "Turka"
             };
             }
 
@@ -332,7 +359,6 @@ namespace ADS_lab
         {
             int n = cityArray.Length;
             int gap = n / 2;
-
             while (gap > 0)
             {
                 for (int i = gap; i < n; i++)
@@ -444,5 +470,7 @@ namespace ADS_lab
         }
     }
 }
+
+
 
 
