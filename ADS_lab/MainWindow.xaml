@@ -6,7 +6,7 @@
         xmlns:viewModel="clr-namespace:ADS_lab.MVVM.ViewModel"
         xmlns:local="clr-namespace:ADS_lab"
         mc:Ignorable="d"
-        Height="600" Width="1080"        
+        Height="770" Width="1280"        
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
@@ -51,36 +51,38 @@
                 
                 <Button Content="Selection"
                         x:Name="selectionSortButton"
-                        Height="50"
+                        Height="70"
                         Foreground="white"
-                        FontSize="14"
+                        FontSize="22"
                         Click="SelectionSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content="Shell"
-                        Height="50"
+                        Height="70"
                         Foreground="white"
-                        FontSize="14"
+                        FontSize="22"
                         Click="ShellSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content="Quick"
                         Height="50"
                         Foreground="white"
-                        FontSize="14"
+                        FontSize="22"
                         Click="QuickSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content=" "
+                <Button Content="Merge"
                         Height="50"
                         Foreground="white"
-                        FontSize="14"
+                        FontSize="22"
+                        Click="MergeSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
-                <Button Content=" "
+                <Button Content="Count "
                         Height="50"
                         Foreground="white"
-                        FontSize="14"
+                        FontSize="22"
+                        Click="CountSortButton_Click"
                         Style="{StaticResource ButtonTheme}">
                 </Button>
                 <Button Content=" "
@@ -113,7 +115,7 @@
 
                 <StackPanel Orientation="Horizontal"
                             Margin="0,0,0,10">
-                    <Border Width ="860"
+                    <Border Width ="1060"
                             Height="150"
                             Margin="5, 0, 0, 0" 
                             CornerRadius="10">
@@ -163,7 +165,7 @@
                                     </TextBox>
                                     <Button x:Name="Generate" 
                                             Click="GenerateButton_Click"
-                                            Width="130"
+                                            Width="135"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="10,5,10,0"
@@ -177,7 +179,7 @@
                                             />
                                     <Button x:Name="GenerateCity" 
                                             Click="GenerateCityButton_Click"
-                                            Width="130"
+                                            Width="135"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="5,5,10,0"
@@ -189,9 +191,23 @@
                                             FontFamily="Arial Black"
                                             BorderThickness="0"
                                             />
+                                    <Button x:Name="Generate2DDouble" 
+                                            Click="GenerateDouble2DButton_Click"
+                                            Width="135"
+                                            Height="30" 
+                                            HorizontalAlignment="Right"
+                                            Margin="5,5,10,0"
+                                            Content="Generate 2D double"
+                                            Background="#1f1f1f"
+                                            Foreground="#ffffff"  
+                                            FontStyle="Normal"
+                                            FontSize="12"
+                                            FontFamily="Arial Black"
+                                            BorderThickness="0"
+                                            />
                                     <Button x:Name="GenerateDouble" 
                                             Click="GenerateDoubleButton_Click"
-                                            Width="130"
+                                            Width="135"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="5,5,10,0"
@@ -224,7 +240,7 @@
                                          TextWrapping="Wrap"/>
                                     <Button x:Name="addElementButton"
                                             Click="AddElementButton_Click"
-                                            Width="130"
+                                            Width="135"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="5,10,10,0"
@@ -239,7 +255,7 @@
 
                                     <Button x:Name="addCityButton"
                                             Click="AddCityButton_Click"
-                                            Width="130"
+                                            Width="135"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="5,10,10,0"
@@ -254,7 +270,7 @@
 
                                     <Button x:Name="addDoubleButton"
                                             Click="AddDoubleButton_Click"
-                                            Width="130"
+                                            Width="135"
                                             Height="30" 
                                             HorizontalAlignment="Right"
                                             Margin="5,10,10,0"
@@ -288,8 +304,8 @@
                                FontFamily="Arial Black"/>
 
                     <StackPanel Orientation="Horizontal">
-                        <Border Width ="860"
-                                Height="240"
+                        <Border Width ="1060"
+                                Height="420"
                                 Margin="5, 0, 0, 0" 
                                 CornerRadius="10">
 
@@ -300,8 +316,47 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                             <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                <TextBox Width="515" 
+                                         Height="170" 
+                                         x:Name="inputArrayTextBlock" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Top" 
+                                         Margin="10,10,0,0"
+                                         BorderThickness="0"
+                                         BorderBrush="#040D12"
+                                         Foreground="white"
+                                         FontSize="20">
 
-                                <TextBox Width="840" 
+                                    <TextBox.Background>
+                                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
+                                            <GradientStop Color="#3f6a56" Offset="0.0"/>
+                                            <GradientStop Color="#559075" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </TextBox.Background>
+                                </TextBox>
+                                    <TextBox Width="515" 
+                                         Height="170" 
+                                         x:Name="outputArrayTextBlock" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Top" 
+                                         Margin="10,10,0,0"
+                                         BorderThickness="0"
+                                         BorderBrush="#040D12"
+                                         Foreground="white"
+                                         FontSize="20">
+
+                                        <TextBox.Background>
+                                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
+                                                <GradientStop Color="#3f6a56" Offset="0.0"/>
+                                                <GradientStop Color="#559075" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.Background>
+                                    </TextBox>
+
+                                </StackPanel>
+
+                                <TextBox Width="1040" 
                                          Height="170" 
                                          x:Name="outputTextBlock" 
                                          HorizontalAlignment="Left" 
@@ -320,7 +375,7 @@
                                     </TextBox.Background>
 
                                 </TextBox>
-                                <TextBox Width="840" 
+                                <TextBox Width="1040" 
                                          Height="40" 
                                          x:Name="outputInfoTextBlock" 
                                          HorizontalAlignment="Left" 
